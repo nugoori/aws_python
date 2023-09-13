@@ -1,5 +1,8 @@
+from userManagement.view.UserView import UserView
+
 class MenuView:
 
+    # 객체 생성 -> 필요할 때 마다 동적 할당을 하기 위해 / 복제
     @staticmethod
     def index():
         print("[사용자 관리 프로그램]")
@@ -14,18 +17,17 @@ class MenuView:
         if select == "q":
             return False
         elif select == "1":
-            pass
+            UserView.ShowAllUser()
         elif select == "2":
-            pass
+            UserView.ShowUserByUsername()
         elif select == "3":
-            from userManagement.view.RegisterUserView import RegisterUserView
-            RegisterUserView.register()
+            UserView.register()
         elif select == "4":
-            pass
+            UserView.updateUser()
         elif select == "5":
-            pass
+            UserView.delete()
         else:
             print("선택하신 번호는 등록되지 않은 번호입니다.")
 
-        print()
+        print("\n")
         return True
