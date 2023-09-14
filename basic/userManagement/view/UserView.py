@@ -147,13 +147,18 @@ class UserView:
             print("삭제할 사용자 정보를 조회 할 수 없습니다")
             return
         df = pd.DataFrame(response.body)
+        print(df)
         userId = input("수정할 사용자 ID를 입력하세요 >>>")
-        index = df.index[df["userId"] == int(userId)].values[0]  # loc(=location) .index[조건] / .values : list로 변환
+        index = df.index[df["userId"] == int(userId)].values[0]
         print(index)
-        print(df.iloc[index])
-        user = UserController.deleteUser(response.body[index])
+        # print(df.iloc[index])
+        # deleteMenu로 빼야 할 부분
+        # userController에서 매개변수로 넘길 user를 받으면 삭제는되지만 'ResponseEntity' object has no attribute 'get'
+        user = UserController.deleteUserByUserId(response.body[index])
 
-        UserController.deleteUser(user)
+        if userId == user:
+            UserController.deleteUserByUserId(user)
+            print("선택한 사용자 정보를 삭제하였습니다.")
 
 
 
